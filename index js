@@ -1,6 +1,6 @@
 let player;
 let watchTime = 0;
-let watchInterval;
+let timerInterval;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('videoPlayer', {
@@ -12,13 +12,11 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.PLAYING) {
-    // Start counting when video plays
-    watchInterval = setInterval(() => {
+    timerInterval = setInterval(() => {
       watchTime++;
       document.getElementById("timer").innerText = `Watch Time: ${watchTime} seconds`;
     }, 1000);
   } else {
-    // Stop counting when paused or ended
-    clearInterval(watchInterval);
+    clearInterval(timerInterval);
   }
 }
