@@ -1,22 +1,46 @@
 let player;
-let watchTime = 0;
-let timerInterval;
+let watchSeconds = 0;
+let watchInterval;
+let videoId;
 
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('videoPlayer', {
-    events: {
-      'onStateChange': onPlayerStateChange
-    }
-  });
+// Get YouTube video ID from ?video= in URL
+const urlParams = new URLSearchParams(window.location.search);
+videoId = urlParams.get("video");
+
+if (!videoId) {
+  document.getElementById("timer").textContent = "No video selected.";
 }
 
+// YouTube API callback
+function onYouTubeIframeAPIReady() {
+  if (videoId) {
+    player = new YT.Player("player", {
+      height: "270",
+      width: "480",
+      videoId: videoId,
+      playerVars: {
+        autoplay: 0,
+        controls: 1,
+        enablejsapi: 1
+      },
+      events: {
+        onStateChange: onPlayerStateChange
+      }
+    });
+  }
+}
+
+// Track watch time
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.PLAYING) {
-    timerInterval = setInterval(() => {
-      watchTime++;
-      document.getElementById("timer").innerText = `Watch Time: ${watchTime} seconds`;
-    }, 1000);
+    if (!watchInterval) {
+      watchInterval = setInterval(() => {
+        watchSeconds++;
+        document.getElementById("timer").textContent = `Watch Time: ${watchSeconds} seconds`;
+      }, 1000);
+    }
   } else {
-    clearInterval(timerInterval);
+    clearInterval(watchInterval);
+    watchInterval = null;
   }
 }
