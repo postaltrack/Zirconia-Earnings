@@ -1,0 +1,24 @@
+let player;
+let watchTime = 0;
+let watchInterval;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('videoPlayer', {
+    events: {
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.PLAYING) {
+    // Start counting when video plays
+    watchInterval = setInterval(() => {
+      watchTime++;
+      document.getElementById("timer").innerText = `Watch Time: ${watchTime} seconds`;
+    }, 1000);
+  } else {
+    // Stop counting when paused or ended
+    clearInterval(watchInterval);
+  }
+}
