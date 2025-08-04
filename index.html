@@ -7,19 +7,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🎥 Watch & Earn</h1>
 
-    <!-- YouTube Video -->
-    <div class="video-container">
-      <iframe 
-        id="videoPlayer"
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID?enablejsapi=1"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-      </iframe>
-    </div>
+  <div class="container">
+    <h1>🎬 Watch & Earn</h1>
+
+    <!-- YouTube iframe -->
+    <iframe id="videoPlayer"
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/Q3yEvwgSB4I?enablejsapi=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
 
     <!-- Timer Display -->
     <h2 id="timer">Watch Time: 0 seconds</h2>
@@ -27,5 +27,6 @@
 
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
