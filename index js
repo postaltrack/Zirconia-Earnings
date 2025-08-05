@@ -1,46 +1,32 @@
 let player;
-let watchSeconds = 0;
-let watchInterval;
-let videoId;
+let watchTime = 0;
+let timerInterval;
 
-// Get YouTube video ID from ?video= in URL
-const urlParams = new URLSearchParams(window.location.search);
-videoId = urlParams.get("video");
+// ✅ Your YouTube video ID
+const videoId = "Q3yEvwgSB4I"; // Replace with your ID if needed
 
-if (!videoId) {
-  document.getElementById("timer").textContent = "No video selected.";
-}
-
-// YouTube API callback
+// Load YouTube player
 function onYouTubeIframeAPIReady() {
-  if (videoId) {
-    player = new YT.Player("player", {
-      height: "270",
-      width: "480",
-      videoId: videoId,
-      playerVars: {
-        autoplay: 0,
-        controls: 1,
-        enablejsapi: 1
-      },
-      events: {
-        onStateChange: onPlayerStateChange
-      }
-    });
-  }
+  player = new YT.Player('player', {
+    videoId: videoId,
+    playerVars: { 'playsinline': 1 },
+    events: {
+      'onStateChange': onPlayerStateChange
+    }
+  });
 }
 
 // Track watch time
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.PLAYING) {
-    if (!watchInterval) {
-      watchInterval = setInterval(() => {
-        watchSeconds++;
-        document.getElementById("timer").textContent = `Watch Time: ${watchSeconds} seconds`;
+    if (!timerInterval) {
+      timerInterval = setInterval(() => {
+        watchTime++;
+        document.getElementById("timer").innerText = `Watch Time: ${watchTime} seconds`;
       }, 1000);
     }
   } else {
-    clearInterval(watchInterval);
-    watchInterval = null;
+    clearInterval(timerInterval);
+    timerInterval = null;
   }
 }
