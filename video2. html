@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Watch & Earn Timer</title>
+  <title>The girl with the power to control blood battle</title>
+
+  <!-- CSS inside HTML -->
   <style>
     body {
       text-align: center;
@@ -21,7 +23,7 @@
       margin-top: 15px;
       color: #007bff;
     }
-    /* Responsive video */
+    /* Responsive YouTube Player */
     #player {
       max-width: 100%;
       aspect-ratio: 16 / 9;
@@ -31,7 +33,7 @@
 </head>
 <body>
 
-  <h1>🎥 Watch & Earn</h1>
+  <h1>The girl with the power to control blood battle</h1>
 
   <!-- YouTube Player -->
   <div id="player"></div>
@@ -41,6 +43,8 @@
 
   <!-- YouTube API -->
   <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!-- JavaScript inside HTML -->
   <script>
     let player;
     let watchTime = 0;
@@ -51,7 +55,7 @@
       player = new YT.Player('player', {
         height: '315',
         width: '560',
-        videoId: 'JYD3mmKLDtWR1Bo5', // YOUR VIDEO ID HERE
+        videoId: 'eG7hhpe3tl-FbKjy', // YOUR new video ID
         playerVars: { 'playsinline': 1 },
         events: {
           'onStateChange': onPlayerStateChange
