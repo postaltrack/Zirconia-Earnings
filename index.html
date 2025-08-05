@@ -1,73 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Watch Timer</title>
-<style>
-    body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-    }
-    #timer {
-        font-size: 1.5em;
-        margin-top: 20px;
-    }
-    iframe {
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <h1>🎥 Watch & Earn Timer</h1>
-<div id="player"></div>
+<div class="video-container">
+  <div id="player"></div>
+</div>
 <h2 id="timer">Watch Time: 0 seconds</h2>
 
 <script src="https://www.youtube.com/iframe_api"></script>
-<script>
-let player;
-let watchTime = 0;
-let timerInterval;
-
-// Get video ID from URL (no default)
-function getVideoIdFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("v"); 
-}
-
-function onYouTubeIframeAPIReady() {
-    const videoId = getVideoIdFromUrl();
-    if (!videoId) {
-        document.getElementById("player").innerHTML = "<p style='color:red;'>❌ No video ID provided in URL.</p>";
-        return;
-    }
-    player = new YT.Player('player', {
-        height: '315',
-        width: '560',
-        videoId: videoId,
-        playerVars: { 'playsinline': 1 },
-        events: {
-            'onStateChange': onPlayerStateChange
-        }
-    });
-}
-
-function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
-        if (!timerInterval) {
-            timerInterval = setInterval(() => {
-                watchTime++;
-                document.getElementById("timer").innerText = `Watch Time: ${watchTime} seconds`;
-            }, 1000);
-        }
-    } else {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
