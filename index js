@@ -2,13 +2,12 @@ let player;
 let watchTime = 0;
 let timerInterval;
 
-// ✅ Your YouTube video ID
-const videoId = "Q3yEvwgSB4I"; // Replace with your ID if needed
-
 // Load YouTube player
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
-    videoId: videoId,
+    height: '315',
+    width: '560',
+    videoId: 'Q3yEvwgSB4I', // YOUR VIDEO ID HERE
     playerVars: { 'playsinline': 1 },
     events: {
       'onStateChange': onPlayerStateChange
@@ -16,7 +15,7 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
-// Track watch time
+// Handle play/pause events
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.PLAYING) {
     if (!timerInterval) {
